@@ -30,7 +30,7 @@ public class CadastroCidadeService {
 
 		cidade.setEstado(estado);
 		
-		return cidade;
+		return cidadeRepository.save(cidade);
 	}
 
 	public void excluir(Long cidadeId) {
