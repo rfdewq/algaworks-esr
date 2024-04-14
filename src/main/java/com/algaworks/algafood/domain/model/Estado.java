@@ -1,4 +1,4 @@
-package com.algaworks.algafood.domain;
+package com.algaworks.algafood.domain.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,16 +10,16 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Permissao {
-
-	@Id
+@Entity
+public class Estado {
+	
 	@EqualsAndHashCode.Include
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(nullable = false)
-	private String descricao;
-	
+	private String nome;
+
 }
