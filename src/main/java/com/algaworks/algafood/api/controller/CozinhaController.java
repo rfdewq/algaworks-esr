@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.algaworks.algafood.domain.exception.EntidadeEmUsoException;
@@ -74,6 +75,15 @@ public class CozinhaController {
 		} catch (EntidadeEmUsoException e) {
 			return ResponseEntity.status(HttpStatus.CONFLICT).build();
 		}
+	}
+	
+	@GetMapping("/consultar-por-nome")
+	public ResponseEntity<Cozinha> buscarPorNome(@RequestParam String nome) {
+		Cozinha cozinha = cozinhaRepository.findByNome(nome);
+		if (cozinha != null) {
+			return ResponseEntity.ok(cozinha);
+		}
+		return ResponseEntity.notFound().build();
 	}
 
 }

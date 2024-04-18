@@ -8,4 +8,5 @@ import com.algaworks.algafood.domain.model.Cozinha;
 @Repository
 public interface CozinhaRepository extends JpaRepository<Cozinha, Long>{
 
+	public Cozinha findByNome(String nome);
 }
