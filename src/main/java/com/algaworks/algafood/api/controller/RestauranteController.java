@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.algaworks.algafood.domain.exception.EntidadeEmUsoException;
@@ -23,6 +22,8 @@ import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.algaworks.algafood.domain.model.Restaurante;
 import com.algaworks.algafood.domain.repository.RestauranteRepository;
 import com.algaworks.algafood.domain.service.CadastroRestauranteService;
+import com.algaworks.algafood.infrastructure.repository.spec.RestauranteComFreteGratisSpec;
+import com.algaworks.algafood.infrastructure.repository.spec.RestauranteComNomeSemelhanteSpec;
 
 @RestController
 @RequestMapping("/restaurantes")
@@ -88,6 +89,13 @@ public class RestauranteController {
 	@GetMapping ("/restaurante-por-nome-e-taxa")
 	public List<Restaurante> consultarPorNomeTaxaFrete(String nome, BigDecimal taxaInicial, BigDecimal taxaFinal) {
 		return restauranteRepository.find(nome, taxaInicial, taxaFinal);
+	}
+	
+	@GetMapping("/restaurante-com-frete-gratis")
+	public List<Restaurante> consultarPorFreteGratis(String nome) {
+		var comFreteGratis = new RestauranteComFreteGratisSpec();
+		var comNomeSemelhante = new RestauranteComNomeSemelhanteSpec(nome);
+		return restauranteRepository.findAll(comFreteGratis.and(comNomeSemelhante));
 	}
 
 }
