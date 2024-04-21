@@ -93,5 +93,10 @@ public class RestauranteController {
 	public List<Restaurante> consultarPorFreteGratis(String nome) {
 		return restauranteRepository.findComFreteGratis(nome);
 	}
+	
+	@GetMapping("/restaurante-buscar-primeiro")
+	public Optional<Restaurante> buscarPrimeiro() {
+		return restauranteRepository.buscarPrimeiro();
+	}
 
 }
