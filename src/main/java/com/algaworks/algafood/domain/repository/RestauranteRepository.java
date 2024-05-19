@@ -19,6 +19,6 @@ public interface RestauranteRepository extends
 
 	public List<Restaurante> find(String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal);
 
-	@Query("from Restaurante r join r.cozinha join fetch r.formasPagamento")
+	@Query("from Restaurante r join fetch r.cozinha join fetch r.formasPagamento")
 	public List<Restaurante> findAll();
 }
