@@ -21,7 +21,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -43,6 +42,7 @@ public class Restaurante {
 	@Column(name = "taxa_frete", nullable = false)
 	private BigDecimal taxaFrete;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="cozinha_id", nullable = false)
 	private Cozinha cozinha;
@@ -51,7 +51,6 @@ public class Restaurante {
 	@Embedded
 	private Endereco endereco;
 	
-	@JsonIgnore
 	@JoinTable(
 	name = "restaurante_forma_pagamento", 
 	joinColumns = @JoinColumn(name="restaurante_id"),
@@ -59,7 +58,6 @@ public class Restaurante {
 	@ManyToMany
 	private List<FormaPagamento> formasPagamento = new ArrayList<>();
 	
-//  @JsonManagedReference
 	@JsonIgnore
 	@OneToMany(mappedBy = "restaurante")
 	private List<Produto> produtos = new ArrayList<>();
